@@ -1,0 +1,7 @@
+import(methods)
+import(BatchJobs)
+import(GenomicRanges)
+
+importClassFrom("gQTLBase", "ciseStore")
+
+export(makeGeuvStore2)

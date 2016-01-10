@@ -1,0 +1,173 @@
+---
+title: "geuvStore2: sharded storage for cis-association statistics"
+author: "Vincent J. Carey, stvjc at channing.harvard.edu"
+date: "February 2015"
+output:
+  BiocStyle::pdf_document:
+    toc: yes
+    number_sections: yes
+  BiocStyle::html_document:
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+---
+
+<!--
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteIndexEntry{geuvStore: sharded storage for cis-association statistics}
+-->
+
+```{r style, echo = FALSE, results = 'asis'}
+BiocStyle::markdown()
+```
+
+# Introduction
+
+The `r Biocpkg("geuvStore2")` package demonstrates an approach
+to management of large numbers of statistics generated in
+integrative genomic analyses.  The specific use case demonstrated
+here is cis-eQTL discovery.  The following considerations 
+motivated the design used here.
+
+* Cluster computing will typically be used to perform cis-eQTL
+searches.  Scalable performance is greatly aided by the
+`r CRANpkg("BatchJobs")` infrastructure, which will create an
+archive of results.  
+
+    - This archive includes a database that
+      holds information on job status (including time and memory
+      required to complete) and result location.  We consider
+      this information worth saving.
+
+    - The collection of results is, by default, "sharded" into
+      a reasonable number of folders holding serialized R objects.
+      We find this approach useful for supporting parallelizable
+      retrieval of results.
+
+* It makes sense to store results of cis-association analyses
+so that queries based on genomic addresses are rapidly resolved.
+Thus all the results are stored in `GRanges` instances, and
+queries based on `GRanges` are efficiently resolvable if an optional
+index is prepared before use.
+
+# Illustration
+
+## Construction of mediator and indices
+
+The most basic entity mediating access to the information
+is the `BatchJobs` registry object.  This is typically
+not created in a portable format, but includes directory
+information that we modify during package installation.
+```{r lkone}
+suppressPackageStartupMessages(library(geuvStore2))
+prst = makeGeuvStore2()
+prst
+```
+Association statistics were recorded
+between expression levels of each gene (as recorded in the
+GEUVADIS FPKM report) and all SNP with MAF $> 10^{-6}$ lying within a radius of
+1 million bp upstream or downstream from the gene region.
+This package
+provides access to a selection of 160 jobs.  
+
+We use the `ciseStore` class to mediate between the user
+and the results data.  This includes optional mappings based
+on gene identifiers (in the case of this example, these
+are Ensembl gene IDs) and `GRanges`.  We have
+stored the maps, but they can be computed in real time
+if need be.
+
+```{r lktwo,cache=TRUE}
+library(gQTLBase)
+# prstore = ciseStore(prst, addProbeMap=TRUE, addRangeMap=TRUE)
+prstore = makeGeuvStore2()
+prstore
+```
+
+## Extraction of content
+
+For a vector of gene identifiers, all available results 
+are extracted.  
+```{r lookup1}
+head(
+extractByProbes(prstore, 
+   probeids=c("ENSG00000183814.10", "ENSG00000174827.9"))
+)
+```
+
+For a request based on genomic coordinates, a
+`GRanges` can be used to query.  `findOverlaps` is
+used, and all results for genes whose regions
+overlap the query ranges are returned.
+```{r lookup2}
+head(
+extractByRanges(prstore, GRanges("1", IRanges(146000000, width=1e6)))
+)
+```
+
+## Applicative programming
+
+The `storeApply` function will be evaluated on all
+store elements.  Iteration is governed by the `r CRANpkg("foreach")`
+package.
+
+```{r doapp}
+lens = storeApply(prstore, length)
+summary(unlist(lens))
+```
+
+## Visualization support
+
+As of March 5, 2015 "biocLite('vjcitn/gQTLbrowser')" will
+acquire a package including an interactive visualization function.
+"example('gQTLbrowse')" will load a queriable interface into
+the browser, with tooltips on the Manhattan plot for the selected gene.
+
+## Origins 
+
+The code used to generate the store follows.  The definition of
+`kpp` actually used is commented out; data(kpp) with the installed
+package will provide the required vector of gene identifiers.
+is supplied.
+```{r basecode,eval=FALSE}
+library(geuvPack)
+data(geuFPKM)
+seqlevelsStyle(geuFPKM) = "NCBI"
+library(GenomeInfoDb)
+ok = which(seqnames(geuFPKM) %in% c(1:22, "X"))
+geuFPKM = geuFPKM[ok,]
+
+library(gQTLBase)
+#load("../INTERACTIVE/geuvExtractStore.rda")
+#kpp = geuvExtractStore@probemap[,1]
+data("kpp", package="geuvStore2")
+geuFPKM  = geuFPKM[kpp,]
+
+library(gQTLBase)
+featlist = balancedFeatList( geuFPKM[order(rowRanges(geuFPKM)),], max=6 )
+lens = sapply(featlist,length)
+featlist = featlist[ which(lens>0) ]
+
+library(BatchJobs)
+regExtrP6 = makeRegistry("extractP6pop",  # tile/cis
+  packages=c("GenomicRanges", "gQTLstats", "geuvPack",
+             "Rsamtools", "VariantAnnotation"), seed=1234)
+myf = function(i) {
+   if (!exists("geuFPKM")) data(geuFPKM)
+   seqlevelsStyle(geuFPKM) = "NCBI"
+   curse = geuFPKM[i,]
+   load("gsvs.rda")
+   svmat = gsvs$sv
+   colnames(svmat) = paste0("SV", 1:ncol(svmat))
+   colData(curse) = cbind(colData(curse), DataFrame(svmat))
+   fmla = as.formula(paste("~popcode+", paste0(colnames(svmat), collapse="+")))
+   curse = regressOut(curse, fmla)
+   pn = gtpath( paste0("chr", as.character(seqnames(curse)[1])) )
+   tf = TabixFile(pn)
+   cisAssoc( curse, tf, cisradius=1000000, nperm=6 )
+   }
+batchMap(regExtrP6, myf, featlist )
+submitJobs(regExtrP6, job.delay = function(n,i) runif(1,1,3))
+```
+
