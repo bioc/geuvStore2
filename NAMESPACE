@@ -4,4 +4,5 @@ import(GenomicRanges)
 
 importClassFrom("gQTLBase", "ciseStore")
 
-export(makeGeuvStore2)
+export(makeGeuvStore2, g17transRegistry,
+	g18transRegistry)

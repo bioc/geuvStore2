@@ -1,1 +1,3 @@
 inst/extractP6pop-files
+inst/jklSVAD_chr17-files
+inst/jklSVAD_chr18-files

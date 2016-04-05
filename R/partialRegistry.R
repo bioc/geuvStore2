@@ -14,3 +14,16 @@ makeGeuvStore2 = function() {
    probemap=pm, rangeMap=Rm)
 }
 
+g17transRegistry = function() {
+ pr = get(load(system.file("jklSVAD_chr17-files/registry.RData", package="geuvStore2")))
+ pr$file.dir = system.file("jklSVAD_chr17-files", package="geuvStore2")
+ pr$work.dir = getwd()
+ pr
+}
+
+g18transRegistry = function() {
+ pr = get(load(system.file("jklSVAD_chr18-files/registry.RData", package="geuvStore2")))
+ pr$file.dir = system.file("jklSVAD_chr18-files", package="geuvStore2")
+ pr$work.dir = getwd()
+ pr
+}
