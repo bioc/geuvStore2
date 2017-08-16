@@ -1,0 +1,255 @@
+
+R Under development (unstable) (2016-01-28 r70028) -- "Unsuffered Consequences"
+Copyright (C) 2016 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> Sys.sleep(0.000000)
+> options(BatchJobs.on.slave = TRUE, BatchJobs.resources.path = '/udd/stvjc/VM/TRANS_2015/CLOUD/jklSVAD_chr17-files/resources/resources_1454681794.RData')
+> library(checkmate)
+> library(BatchJobs)
+Loading required package: BBmisc
+> res = BatchJobs:::doJob(
++ 	reg = loadRegistry('/udd/stvjc/VM/TRANS_2015/CLOUD/jklSVAD_chr17-files'),
++ 	ids = c(25L),
++ 	multiple.result.files = FALSE,
++ 	disable.mail = FALSE,
++ 	first = 1L,
++ 	last = 50L,
++ 	array.id = NA)
+Loading registry: /udd/stvjc/VM/TRANS_2015/CLOUD/jklSVAD_chr17-files/registry.RData
+Loading required package: GenomeInfoDb
+Loading required package: stats4
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: ‘BiocGenerics’
+
+The following objects are masked from ‘package:parallel’:
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following object is masked from ‘package:BBmisc’:
+
+    normalize
+
+The following objects are masked from ‘package:stats’:
+
+    IQR, mad, xtabs
+
+The following objects are masked from ‘package:base’:
+
+    anyDuplicated, append, as.data.frame, cbind, colnames, do.call,
+    duplicated, eval, evalq, Filter, Find, get, grep, grepl, intersect,
+    is.unsorted, lapply, lengths, Map, mapply, match, mget, order,
+    paste, pmax, pmax.int, pmin, pmin.int, Position, rank, rbind,
+    Reduce, rownames, sapply, setdiff, sort, table, tapply, union,
+    unique, unsplit
+
+Loading required package: S4Vectors
+
+Attaching package: ‘S4Vectors’
+
+The following object is masked from ‘package:base’:
+
+    expand.grid
+
+Loading required package: IRanges
+
+Attaching package: ‘IRanges’
+
+The following object is masked from ‘package:BBmisc’:
+
+    collapse
+
+Loading required package: GenomicFiles
+Loading required package: GenomicRanges
+Loading required package: SummarizedExperiment
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: ‘Biobase’
+
+The following object is masked from ‘package:checkmate’:
+
+    anyMissing
+
+Loading required package: BiocParallel
+Loading required package: Rsamtools
+Loading required package: Biostrings
+Loading required package: XVector
+Loading required package: rtracklayer
+Loading required package: geuvPack
+Loading required package: gQTLstats
+Loading required package: Homo.sapiens
+Loading required package: AnnotationDbi
+Loading required package: OrganismDbi
+Loading required package: GenomicFeatures
+Loading required package: GO.db
+Loading required package: DBI
+
+Loading required package: org.Hs.eg.db
+
+Loading required package: TxDb.Hsapiens.UCSC.hg19.knownGene
+Now getting the GODb Object directly
+Now getting the OrgDb Object directly
+Now getting the TxDb Object directly
+Loading required package: VariantAnnotation
+
+Attaching package: ‘VariantAnnotation’
+
+The following object is masked from ‘package:base’:
+
+    tabulate
+
+Loading conf: 
+2016-02-05 14:17:28: Starting job on node node044.
+Auto-mailer settings: start=none, done=none, error=none.
+Setting work dir: /udd/stvjc/VM/TRANS_2015/CLOUD
+########## Executing jid=25 ##########
+Timestamp: 2016-02-05 14:17:28
+BatchJobs job:
+  Job id: 25
+  Fun id: ee26373fd2eb4407c7ef3f2f7967a1b2
+  Fun formals: 
+  Name: NA
+  Seed: 337668026
+  Pars: <unnamed>=25
+Setting seed: 337668026
+using assay() to extract 'expression' matrix from RangedSummarizedExperiment
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+
+Attaching package: ‘Matrix’
+
+The following object is masked from ‘package:VariantAnnotation’:
+
+    expand
+
+The following objects are masked from ‘package:GenomicFiles’:
+
+    pack, unpack
+
+The following object is masked from ‘package:S4Vectors’:
+
+    expand
+
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam ‘info’ fields not found in  header: ‘LDAF’
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Result:
+List of 4
+ $ obs  :Formal class 'GRanges' [package "GenomicRanges"] with 6 slots
+  .. .. [list output truncated]
+ $ perm :Formal class 'GRanges' [package "GenomicRanges"] with 6 slots
+  .. .. [list output truncated]
+ $ dist : num [1:10, 1:5885] Inf Inf Inf Inf Inf ...
+ $ pdist: num [1:10, 1:5885] Inf Inf Inf Inf Inf ...
+NULL
+Writing result file: /udd/stvjc/VM/TRANS_2015/CLOUD/jklSVAD_chr17-files/jobs/25/25-result.RData
+2016-02-05 17:35:06: All done.
+Setting work back to: /udd/stvjc/VM/TRANS_2015/CLOUD
+Memory usage according to gc:
+           used  (Mb) gc trigger  (Mb)  max used   (Mb)
+Ncells  5068510 270.7   12002346 641.0  12002346  641.0
+Vcells 20781447 158.6   68900367 525.7 302915470 2311.1
+> BatchJobs:::setOnSlave(FALSE)
+> 
+> proc.time()
+     user    system   elapsed 
+11654.732    89.801 11896.575 
