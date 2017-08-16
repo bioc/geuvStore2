@@ -1,0 +1,152 @@
+
+R Under development (unstable) (2015-11-17 r69644) -- "Unsuffered Consequences"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> Sys.sleep(1.802478)
+> options(BatchJobs.on.slave = TRUE, BatchJobs.resources.path = '/udd/stvjc/VM/CUMULUS_2015/NPERM_6/MULTICORE/extractP6pop-files/resources/resources_1448504567.RData')
+> library(checkmate)
+> library(BatchJobs)
+Loading required package: BBmisc
+> res = BatchJobs:::doJob(
++ 	reg = loadRegistry('/udd/stvjc/VM/CUMULUS_2015/NPERM_6/MULTICORE/extractP6pop-files'),
++ 	ids = c(46L),
++ 	multiple.result.files = FALSE,
++ 	disable.mail = FALSE,
++ 	first = 1L,
++ 	last = 160L,
++ 	array.id = NA)
+Loading registry: /udd/stvjc/VM/CUMULUS_2015/NPERM_6/MULTICORE/extractP6pop-files/registry.RData
+Loading required package: GenomicRanges
+Loading required package: BiocGenerics
+Loading required package: parallel
+
+Attaching package: 'BiocGenerics'
+
+The following objects are masked from 'package:parallel':
+
+    clusterApply, clusterApplyLB, clusterCall, clusterEvalQ,
+    clusterExport, clusterMap, parApply, parCapply, parLapply,
+    parLapplyLB, parRapply, parSapply, parSapplyLB
+
+The following object is masked from 'package:BBmisc':
+
+    normalize
+
+The following objects are masked from 'package:stats':
+
+    IQR, mad, xtabs
+
+The following objects are masked from 'package:base':
+
+    Filter, Find, Map, Position, Reduce, anyDuplicated, append,
+    as.data.frame, cbind, colnames, do.call, duplicated, eval, evalq,
+    get, grep, grepl, intersect, is.unsorted, lapply, lengths, mapply,
+    match, mget, order, paste, pmax, pmax.int, pmin, pmin.int, rank,
+    rbind, rownames, sapply, setdiff, sort, table, tapply, union,
+    unique, unsplit
+
+Loading required package: S4Vectors
+Loading required package: stats4
+
+Attaching package: 'S4Vectors'
+
+The following object is masked from 'package:base':
+
+    expand.grid
+
+Loading required package: IRanges
+
+Attaching package: 'IRanges'
+
+The following object is masked from 'package:BBmisc':
+
+    collapse
+
+Loading required package: GenomeInfoDb
+Loading required package: geuvPack
+Loading required package: SummarizedExperiment
+Loading required package: Biobase
+Welcome to Bioconductor
+
+    Vignettes contain introductory material; view with
+    'browseVignettes()'. To cite Bioconductor, see
+    'citation("Biobase")', and for packages 'citation("pkgname")'.
+
+
+Attaching package: 'Biobase'
+
+The following object is masked from 'package:checkmate':
+
+    anyMissing
+
+Loading required package: gQTLstats
+Loading required package: Rsamtools
+Loading required package: XVector
+Loading required package: Biostrings
+Loading required package: VariantAnnotation
+
+Attaching package: 'VariantAnnotation'
+
+The following object is masked from 'package:base':
+
+    tabulate
+
+Loading conf: 
+2015-11-25 21:47:32: Starting job on node rex2.
+Auto-mailer settings: start=none, done=none, error=none.
+Setting work dir: /udd/stvjc/VM/CUMULUS_2015/NPERM_6/MULTICORE
+########## Executing jid=46 ##########
+Timestamp: 2015-11-25 21:47:32
+BatchJobs job:
+  Job id: 46
+  Fun id: f693504ffeb0eb5e988e9970b788818d
+  Fun formals: 
+  Name: NA
+  Seed: 1279
+  Pars: <unnamed>=ENSG00000122...
+Setting seed: 1279
+using assay() to extract 'expression' matrix from RangedSummarizedExperiment
+Warning in .vcf_usertag(map, tag, nm, verbose) :
+  ScanVcfParam 'info' fields not found in  header: 'LDAF'
+
+Attaching package: 'Matrix'
+
+The following object is masked from 'package:VariantAnnotation':
+
+    expand
+
+The following object is masked from 'package:IRanges':
+
+    expand
+
+checking for universal heterozygous loci for exclusion (as dropUnivHet == TRUE) ...
+done checking.
+Result:
+Formal class 'GRanges' [package "GenomicRanges"] with 6 slots
+  .. [list output truncated]
+NULL
+Writing result file: /udd/stvjc/VM/CUMULUS_2015/NPERM_6/MULTICORE/extractP6pop-files/jobs/46/46-result.RData
+2015-11-25 21:58:16: All done.
+Setting work back to: /udd/stvjc/VM/CUMULUS_2015/NPERM_6/MULTICORE
+Memory usage according to gc:
+           used  (Mb) gc trigger   (Mb)   max used    (Mb)
+Ncells  5022144 268.3   14842267  792.7   36236006  1935.3
+Vcells 49942637 381.1  954138543 7279.5 1490841447 11374.3
+> BatchJobs:::setOnSlave(FALSE)
+> 
+> proc.time()
+   user  system elapsed 
+633.635  12.066 668.621 
